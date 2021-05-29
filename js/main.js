@@ -29,4 +29,4 @@ const drawShape = {
   },
 };
 
-drawShape.mask(1);
+drawShape.mask();
