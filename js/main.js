@@ -57,6 +57,13 @@ const drawShape = {
   circleDecoration: (color1, color2, radius) => {
     const circlePosition = [
       {
+        x: 500,
+        y: 240,
+      },
+    ];
+
+    const circlePosition_left = [
+      {
         x: 140,
         y: 240,
       },
@@ -67,22 +74,6 @@ const drawShape = {
       {
         x: 380,
         y: 200,
-      },
-      {
-        x: 500,
-        y: 240,
-      },
-      {
-        x: 630,
-        y: 200,
-      },
-      {
-        x: 750,
-        y: 200,
-      },
-      {
-        x: 860,
-        y: 240,
       },
       {
         x: 168,
@@ -96,19 +87,15 @@ const drawShape = {
         x: 420,
         y: 410,
       },
-      {
-        x: 1000 - 420,
-        y: 410,
-      },
-      {
-        x: 1000 - 260,
-        y: 420,
-      },
-      {
-        x: 832,
-        y: 340,
-      },
     ];
+
+    circlePosition_left.forEach((obj) => {
+      let right = { x: 1000 - obj.x, y: obj.y };
+      circlePosition.push(obj);
+      circlePosition.push(right);
+    });
+
+    console.log(circlePosition);
 
     circlePosition.forEach((element) => {
       let bg = ctx.createLinearGradient(
