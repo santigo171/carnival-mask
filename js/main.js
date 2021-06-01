@@ -2,12 +2,22 @@ console.log("Hello World!");
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+const editor = {
+  mask: document.getElementById("mask"),
+  border: document.getElementById("border"),
+  upside: document.getElementById("upside"),
+  side: document.getElementById("side"),
+};
 
 function radian(degrees) {
   return (Math.PI / 180) * degrees;
 }
 
 const drawShape = {
+  colors: {
+    last1: undefined,
+    last2: undefined,
+  },
   maskShape: () => {
     ctx.bezierCurveTo(200, 200, 250, 100, 500, 200);
     ctx.bezierCurveTo(750, 100, 800, 200, 900, 200);
@@ -16,8 +26,16 @@ const drawShape = {
   },
   baseMask: (color1, color2) => {
     let bg = ctx.createLinearGradient(100, 200, 900, 430);
-    bg.addColorStop(0.08, color1);
-    bg.addColorStop(1, color2);
+
+    if (color1 == undefined && color2 == undefined) {
+      bg.addColorStop(0.08, drawShape.colors.last1);
+      bg.addColorStop(1, drawShape.colors.last1);
+    } else {
+      bg.addColorStop(0.08, color1);
+      bg.addColorStop(1, color2);
+      drawShape.colors.last1 = color1;
+      drawShape.colors.last2 = color2;
+    }
 
     ctx.beginPath();
     ctx.fillStyle = bg;
@@ -29,7 +47,6 @@ const drawShape = {
     ctx.bezierCurveTo(600, 370, 720, 400, 800, 280);
 
     ctx.fill();
-    ctx.closePath();
   },
   border: (color1, color2) => {
     let bg = ctx.createLinearGradient(100, 200, 900, 430);
@@ -95,8 +112,6 @@ const drawShape = {
       circlePosition.push(right);
     });
 
-    console.log(circlePosition);
-
     circlePosition.forEach((element) => {
       let bg = ctx.createLinearGradient(
         element.x - radius,
@@ -114,11 +129,44 @@ const drawShape = {
       ctx.closePath();
     });
   },
+  gem: (color1, color2) => {
+    ctx.beginPath();
+    let bg = ctx.createLinearGradient(445, 95, 555, 200);
+    bg.addColorStop(0.08, color1);
+    bg.addColorStop(1, color2);
+
+    ctx.strokeStyle = "#EBECF0";
+    ctx.fillStyle = bg;
+    ctx.lineWidth = 5;
+    ctx.arc(500, 145, 55, 0, Math.PI * 2, true);
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+  },
+  upside: (color1, color2) => {
+    let bg = ctx.createLinearGradient(100, 200, 900, 430);
+    bg.addColorStop(0.08, color1);
+    bg.addColorStop(1, color2);
+    ctx.strokeStyle = bg;
+
+    // ctx.moveTo(100, 200);
+    // ctx.bezierCurveTo(220, 370, 400, 400, 4500, 280);
+    ctx.stroke();
+    ctx.closePath();
+  },
 };
+
+function renderNameOnCanvas() {
+  const input = document.getElementById("name-input");
+  ctx.font = "48px serif";
+  ctx.fillText(input.value, 10, 50);
+}
 
 drawShape.baseMask("rgba(255, 122, 0)", "rgba(100, 212, 155)");
 drawShape.border("rgba(140, 212, 155)", "rgba(255, 122, 255)");
 drawShape.circleDecoration("rgba(10, 212, 255)", "rgba(255, 12, 0)", 20);
+drawShape.gem("rgba(255, 122, 0)", "rgba(100, 212, 155)");
+// drawShape.upside("rgba(140, 212, 155)", "rgba(255, 122, 255)");
 
 // background color
 // border color
@@ -126,3 +174,4 @@ drawShape.circleDecoration("rgba(10, 212, 255)", "rgba(255, 12, 0)", 20);
 // border decoration
 // upside decoration
 // side decoration
+// Marcar con el nombre

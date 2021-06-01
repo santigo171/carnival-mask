@@ -57,6 +57,23 @@ canvas {
   margin: 0 auto;
 }
 
+.editor {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.editor > div {
+  border-bottom: #000 1px solid;
+}
+
+.editor__title {
+  font-size: 2rem;
+}
+
+#name > label {
+  font-size: 1rem;
+}
+
 footer {
   height: 100%;
 
