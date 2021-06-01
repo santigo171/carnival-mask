@@ -1,5 +1,3 @@
-console.log("Hello World!");
-
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const editor = {
@@ -13,10 +11,21 @@ function radian(degrees) {
   return (Math.PI / 180) * degrees;
 }
 
+let mask = {
+  base: ["rgba(255, 122, 0)", "rgba(100, 212, 155)"],
+  border: "",
+  upside: "",
+  side: "",
+};
+
 const drawShape = {
   colors: {
     last1: undefined,
     last2: undefined,
+  },
+  draw: () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // mask.
   },
   maskShape: () => {
     ctx.bezierCurveTo(200, 200, 250, 100, 500, 200);
@@ -158,13 +167,23 @@ const drawShape = {
 
 function renderNameOnCanvas() {
   const input = document.getElementById("name-input");
-  ctx.font = "48px serif";
-  ctx.fillText(input.value, 10, 50);
+  ctx.fillStyle = "black";
+
+  ctx.font = "20px arial,sans-serif";
+  ctx.textAlign = "start";
+  ctx.setTransform(1, 0.1, -0.3, 0.9, 0, 0);
+  ctx.fillText("Created by:", 350, 420);
+
+  ctx.font = "30px arial,sans-serif";
+  ctx.setTransform(1, 0.1, -0.3, 0.9, 0, 0);
+  ctx.fillText(input.value, 320, 450);
+
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
 }
 
 drawShape.baseMask("rgba(255, 122, 0)", "rgba(100, 212, 155)");
-drawShape.border("rgba(140, 212, 155)", "rgba(255, 122, 255)");
-drawShape.circleDecoration("rgba(10, 212, 255)", "rgba(255, 12, 0)", 20);
+drawShape.border("rgba(240, 212, 155)", "rgba(255, 122, 255)");
+// drawShape.circleDecoration("rgba(10, 212, 255)", "rgba(255, 12, 0)", 20);
 drawShape.gem("rgba(255, 122, 0)", "rgba(100, 212, 155)");
 // drawShape.upside("rgba(140, 212, 155)", "rgba(255, 122, 255)");
 
