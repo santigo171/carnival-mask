@@ -32,26 +32,27 @@
         </div>
         <div id="mask">
           <h3 class="editor__title">Mask</h3>
-          <button id="mask-color1"></button>
-          <button id="mask-color2"></button>
-          <button id="mask-color3"></button>
-          <button id="mask-color4"></button>
-          <button id="mask-color5"></button>
+          <label for="base1">Select a color:</label>
+          <input id="base1" type="color" value="#ff7b00" />
+          <label for="base2">Select another color:</label>
+          <input id="base2" type="color" value="#64d49a" />
+          <button onclick="renderCanvas()">Render in screen</button>
         </div>
         <div id="border">
           <h3 class="editor__title">Border</h3>
-          <button id="border1"></button>
-          <button id="border2"></button>
-          <button id="border3"></button>
-          <button id="border4"></button>
-          <button id="border5"></button>
+          <label for="border1">Select a color:</label>
+          <input id="border1" type="color" value="#f0d49b" />
+          <label for="border2">Select another color:</label>
+          <input id="border2" type="color" value="#f7161f" />
+
+          <button onclick="renderCanvas()">Render in screen</button>
         </div>
-        <div id="upside">
+        <!-- <div id="upside">
           <h3 class="editor__title">Upside</h3>
         </div>
         <div id="side">
           <h3 class="editor__title">Side</h3>
-        </div>
+        </div> -->
       </div>
       <footer class="center">
         <p>

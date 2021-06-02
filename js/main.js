@@ -13,19 +13,35 @@ function radian(degrees) {
 
 let mask = {
   base: ["rgba(255, 122, 0)", "rgba(100, 212, 155)"],
-  border: "",
-  upside: "",
-  side: "",
+  border: [undefined, undefined],
+  upside: undefined,
+  side: undefined,
 };
+
+const maskFunctions = {
+  base: (color1, color2) => drawShape.baseMask(color1, color2),
+  border: (color1, color2) => drawShape.border(color1, color2),
+  upside: () => {},
+  side: () => {},
+};
+
+function renderCanvas() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (const property in mask) {
+    mask[property][0] = document.getElementById(property + "1").value;
+    mask[property][1] = document.getElementById(property + "2").value;
+
+    if (mask[property] != undefined) {
+      maskFunctions[property](mask[property][0], mask[property][1]);
+    }
+  }
+  renderNameOnCanvas();
+}
 
 const drawShape = {
   colors: {
     last1: undefined,
     last2: undefined,
-  },
-  draw: () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // mask.
   },
   maskShape: () => {
     ctx.bezierCurveTo(200, 200, 250, 100, 500, 200);
@@ -181,16 +197,10 @@ function renderNameOnCanvas() {
   ctx.setTransform(1, 0, 0, 1, 0, 0);
 }
 
-drawShape.baseMask("rgba(255, 122, 0)", "rgba(100, 212, 155)");
-drawShape.border("rgba(240, 212, 155)", "rgba(255, 122, 255)");
+// drawShape.baseMask("rgba(255, 122, 0)", "rgba(100, 212, 155)");
+// drawShape.border("rgba()", "rgba()");
 // drawShape.circleDecoration("rgba(10, 212, 255)", "rgba(255, 12, 0)", 20);
-drawShape.gem("rgba(255, 122, 0)", "rgba(100, 212, 155)");
+// drawShape.gem("rgba(5, 255, 20)", "rgba(0, 212, 155)");
 // drawShape.upside("rgba(140, 212, 155)", "rgba(255, 122, 255)");
 
-// background color
-// border color
-// border style
-// border decoration
-// upside decoration
-// side decoration
-// Marcar con el nombre
+renderCanvas();
