@@ -1,11 +1,5 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-const editor = {
-  mask: document.getElementById("mask"),
-  border: document.getElementById("border"),
-  upside: document.getElementById("upside"),
-  side: document.getElementById("side"),
-};
 
 function radian(degrees) {
   return (Math.PI / 180) * degrees;
@@ -14,15 +8,16 @@ function radian(degrees) {
 let mask = {
   base: ["rgba(255, 122, 0)", "rgba(100, 212, 155)"],
   border: [undefined, undefined],
-  upside: undefined,
-  side: undefined,
+  circleDecoration: [undefined, undefined],
 };
 
 const maskFunctions = {
   base: (color1, color2) => drawShape.baseMask(color1, color2),
   border: (color1, color2) => drawShape.border(color1, color2),
   upside: () => {},
-  side: () => {},
+  circleDecoration: (color1, color2) => {
+    drawShape.circleDecoration(color1, color2, 20);
+  },
 };
 
 function renderCanvas() {
