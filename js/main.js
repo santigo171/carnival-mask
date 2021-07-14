@@ -20,8 +20,19 @@ const maskFunctions = {
   },
 };
 
-function renderCanvas() {
+function renderCanvas(print) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (print) {
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "black";
+    ctx.font = "20px arial,sans-serif";
+    ctx.textAlign = "start";
+    ctx.fillText("Made with https://carnivalmask.netlify.app/", 50, 50);
+  }
+
   for (const property in mask) {
     mask[property][0] = document.getElementById(property + "1").value;
     mask[property][1] = document.getElementById(property + "2").value;
@@ -178,6 +189,11 @@ const drawShape = {
 
 function renderNameOnCanvas() {
   const input = document.getElementById("name-input");
+
+  if (input.value == "") {
+    return;
+  }
+
   ctx.fillStyle = "black";
 
   ctx.font = "20px arial,sans-serif";
@@ -197,5 +213,21 @@ function renderNameOnCanvas() {
 // drawShape.circleDecoration("rgba(10, 212, 255)", "rgba(255, 12, 0)", 20);
 // drawShape.gem("rgba(5, 255, 20)", "rgba(0, 212, 155)");
 // drawShape.upside("rgba(140, 212, 155)", "rgba(255, 122, 255)");
+
+const download = () => {
+  renderCanvas(true);
+
+  const url = canvas.toDataURL("image/png");
+  const a = document.createElement("a");
+
+  a.setAttribute("href", url);
+  a.setAttribute("download", "");
+  a.style.display = "none";
+
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  renderCanvas();
+};
 
 renderCanvas();
