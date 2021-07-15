@@ -1,5 +1,6 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+const font = `'Otomanopee One'`;
 
 function radian(degrees) {
   return (Math.PI / 180) * degrees;
@@ -28,7 +29,7 @@ function renderCanvas(print) {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     ctx.fillStyle = "black";
-    ctx.font = "20px arial,sans-serif";
+    ctx.font = `20px ${font} , sans-serif`;
     ctx.textAlign = "start";
     ctx.fillText("Made with https://carnivalmask.netlify.app/", 50, 50);
   }
@@ -196,23 +197,17 @@ function renderNameOnCanvas() {
 
   ctx.fillStyle = "black";
 
-  ctx.font = "20px arial,sans-serif";
+  ctx.font = `20px ${font} , sans-serif`;
   ctx.textAlign = "start";
   ctx.setTransform(1, 0.1, -0.3, 0.9, 0, 0);
   ctx.fillText("Created by:", 350, 420);
 
-  ctx.font = "30px arial,sans-serif";
+  ctx.font = `30px ${font} , sans-serif`;
   ctx.setTransform(1, 0.1, -0.3, 0.9, 0, 0);
   ctx.fillText(input.value, 320, 450);
 
   ctx.setTransform(1, 0, 0, 1, 0, 0);
 }
-
-// drawShape.baseMask("rgba(255, 122, 0)", "rgba(100, 212, 155)");
-// drawShape.border("rgba()", "rgba()");
-// drawShape.circleDecoration("rgba(10, 212, 255)", "rgba(255, 12, 0)", 20);
-// drawShape.gem("rgba(5, 255, 20)", "rgba(0, 212, 155)");
-// drawShape.upside("rgba(140, 212, 155)", "rgba(255, 122, 255)");
 
 const download = () => {
   renderCanvas(true);
