@@ -2,6 +2,8 @@
 
 Create your own mask for the **Brazilian Carnival!**, a game created for the English Day.
 
+Deployment on: https://carnivalmask.netlify.app/
+
 By **La Qualité** 9A:
 
 - Jose Moreno
